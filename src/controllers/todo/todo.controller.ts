@@ -1,14 +1,15 @@
-import { Todo, type Todos } from "../../models";
-import type { GeneralReply } from "../../types";
+import { Todo } from "../../models";
+import type { PaginationParams } from "../../types";
 
 const createTodoController = () => {
     return {
-        async getAll(): Promise<GeneralReply<Todos>> {
-            const todos = await Todo.findAll();
+        async getAll({ limit, offset }: PaginationParams) {
+            const { rows: todos, count: totalTodos } =
+                await Todo.findAndCountAll({ limit, offset });
 
             return {
-                success: true,
-                data: todos,
+                todos,
+                totalTodos,
             };
         },
     };

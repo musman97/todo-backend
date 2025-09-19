@@ -1,18 +1,13 @@
 import fastify from "fastify";
-import { API_V1_BASE_ROUTE } from "./constants";
 import { TodoRoutes, todoRoute } from "./routes";
 import type { GeneralReply } from "./types";
+import { createApiResourcePath } from "./utils";
 
 const app = fastify({
     logger: true,
 });
 
-app.register(
-    (fastify) => {
-        fastify.register(todoRoute, { prefix: TodoRoutes.base });
-    },
-    { prefix: API_V1_BASE_ROUTE },
-);
+app.register(todoRoute, { prefix: createApiResourcePath()(TodoRoutes.base) });
 
 app.all("*", (request, reply) => {
     const { url, method } = request;
