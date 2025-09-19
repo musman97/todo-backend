@@ -5,6 +5,8 @@
     "main": "src/server.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node ./dist/server.js",
+        "dev": "nodemon",
         "format": "biome format --write",
         "lint": "biome lint",
         "typecheck": "npx tsc --noEmit",
