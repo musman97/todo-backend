@@ -64,7 +64,6 @@ export const todoRoute: FastifyPluginAsync = async (fastify) => {
         },
         async (request, reply) => {
             const createdTodo = await todoController.create(request.body);
-            console.log("createdTodo", createdTodo);
             reply.status(201).send(createSuccessResponse(createdTodo));
         },
     );
