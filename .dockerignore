@@ -1,0 +1,34 @@
+# Node.js dependencies and build output
+node_modules/
+dist/
+build/
+out/
+.tmp/
+.cache/
+
+*.log
+
+# Editor and IDE specific files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Version control system files
+.git/
+.gitignore
+
+# Docker-related files (to avoid copying unnecessary configs)
+Dockerfile
+.dockerignore
+docker-compose.yml
+docker-compose.*.yml
+
+# Optional: TypeScript build artifacts
+*.tsbuildinfo
+
+# Optional: Lock files (if you install dependencies within the Dockerfile)
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*

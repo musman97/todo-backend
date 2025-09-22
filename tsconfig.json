@@ -7,10 +7,10 @@
 
         // Environment Settings
         // See also https://aka.ms/tsconfig/module
-        "module": "esnext",
+        "module": "commonjs",
         "target": "esnext",
         // For nodejs:
-        "lib": ["esnext"],
+        "lib": ["ES2015"],
         "types": ["node"],
         // and npm install -D @types/node
 
@@ -35,7 +35,7 @@
         // Recommended Options
         "strict": true,
         "jsx": "react-jsx",
-        "verbatimModuleSyntax": true,
+        "verbatimModuleSyntax": false,
         "isolatedModules": true,
         "noUncheckedSideEffectImports": true,
         "moduleDetection": "force",

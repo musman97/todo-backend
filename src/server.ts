@@ -57,7 +57,7 @@ const startServer = async () => {
         await db.sequelize.sync({});
 
         const port = Env.PORT;
-        const host = "localhost";
+        const host = Env.isProduction ? "0.0.0.0" : "localhost";
 
         await app.listen({ port, host });
 
