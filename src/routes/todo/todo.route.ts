@@ -4,6 +4,7 @@ import { DEFAULT_PAGINATION_PARAMS, ROOT_ROUTE } from "../../constants";
 import { todoController } from "../../controllers";
 import type { CreateTodoDao, UpdateTodoDao } from "../../dao";
 import { paginationPlugin } from "../../plugins";
+import { todoSchemas } from "../../schemas";
 import {
     createFailureResponse,
     createPaginatedResponse,
@@ -11,6 +12,7 @@ import {
     createSuccessResponseWithoutData,
     isDefined,
 } from "../../utils";
+import type { IdParam } from "./types";
 
 export const TodoRoutes = {
     base: "/todo",
@@ -71,17 +73,11 @@ export const todoRoute: FastifyPluginAsync = async (fastify) => {
         },
     );
 
-    fastify.patch<{ Params: { id: number }; Body: UpdateTodoDao }>(
+    fastify.patch<{ Params: IdParam; Body: UpdateTodoDao }>(
         TodoRoutes.byId,
         {
             schema: {
-                params: {
-                    type: "object",
-                    properties: {
-                        id: { type: "number" },
-                    },
-                    required: ["id"],
-                },
+                params: todoSchemas.idParam,
             },
             preHandler: (request, reply, done) => {
                 const body = request.body ?? {};
@@ -131,17 +127,11 @@ export const todoRoute: FastifyPluginAsync = async (fastify) => {
         },
     );
 
-    fastify.delete<{ Params: { id: number } }>(
+    fastify.delete<{ Params: IdParam }>(
         TodoRoutes.byId,
         {
             schema: {
-                params: {
-                    type: "object",
-                    properties: {
-                        id: { type: "number" },
-                    },
-                    required: ["id"],
-                },
+                params: todoSchemas.idParam,
             },
         },
         async (request, reply) => {
