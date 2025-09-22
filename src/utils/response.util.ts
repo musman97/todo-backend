@@ -5,6 +5,10 @@ export const createSuccessResponse = <T>(data: T): GeneralReply<T> => ({
     data,
 });
 
+export const createSuccessResponseWithoutData = (): GeneralReply => ({
+    success: true,
+});
+
 export const createPaginatedResponse = <T>(
     data: T[],
     paginationParams: PaginationParams,

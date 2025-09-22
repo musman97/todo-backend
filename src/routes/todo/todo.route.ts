@@ -8,6 +8,7 @@ import {
     createFailureResponse,
     createPaginatedResponse,
     createSuccessResponse,
+    createSuccessResponseWithoutData,
     isDefined,
 } from "../../utils";
 
@@ -126,6 +127,31 @@ export const todoRoute: FastifyPluginAsync = async (fastify) => {
                 reply.status(400).send(createFailureResponse(error));
             } else {
                 reply.status(200).send(createSuccessResponse(updatedTodo));
+            }
+        },
+    );
+
+    fastify.delete<{ Params: { id: number } }>(
+        TodoRoutes.byId,
+        {
+            schema: {
+                params: {
+                    type: "object",
+                    properties: {
+                        id: { type: "number" },
+                    },
+                    required: ["id"],
+                },
+            },
+        },
+        async (request, reply) => {
+            const id = request.params?.id ?? -1;
+            const { error } = await todoController.delete(id);
+
+            if (error) {
+                reply.status(400).send(createFailureResponse(error));
+            } else {
+                reply.status(200).send(createSuccessResponseWithoutData());
             }
         },
     );

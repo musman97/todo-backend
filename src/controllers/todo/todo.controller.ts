@@ -31,6 +31,15 @@ const createTodoController = () => {
                 updatedTodo,
             };
         },
+        async delete(id: TodoId) {
+            const rowsAffected = await Todo.destroy({ where: { id } });
+
+            if (rowsAffected === 0) {
+                return { error: `Todo with id: ${id} does not exists` };
+            }
+
+            return {};
+        },
     };
 };
 
