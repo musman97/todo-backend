@@ -13,10 +13,10 @@ export class Todo extends Model<
     InferAttributes<Todo>,
     InferCreationAttributes<Todo>
 > {
-    declare id: number;
+    declare id?: number;
     declare title: string;
     declare description: string;
-    declare completed: boolean;
+    declare completed?: boolean;
 }
 
 Todo.init(

@@ -1,3 +1,4 @@
+import type { CreateTodoDao } from "../../dao";
 import { Todo } from "../../models";
 import type { PaginationParams } from "../../types";
 
@@ -11,6 +12,9 @@ const createTodoController = () => {
                 todos,
                 totalTodos,
             };
+        },
+        async create(dao: CreateTodoDao) {
+            return await Todo.create(dao);
         },
     };
 };
