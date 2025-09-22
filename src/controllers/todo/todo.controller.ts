@@ -1,5 +1,5 @@
-import type { CreateTodoDao } from "../../dao";
-import { Todo } from "../../models";
+import type { CreateTodoDao, UpdateTodoDao } from "../../dao";
+import { Todo, type TodoId } from "../../models";
 import type { PaginationParams } from "../../types";
 
 const createTodoController = () => {
@@ -15,6 +15,21 @@ const createTodoController = () => {
         },
         async create(dao: CreateTodoDao) {
             return await Todo.create(dao);
+        },
+        async update(id: TodoId, dao: UpdateTodoDao) {
+            const [rowsChanged] = await Todo.update(dao, { where: { id } });
+
+            if (rowsChanged === 0) {
+                return {
+                    error: `Todo with id: ${id} does not exists`,
+                };
+            }
+
+            const updatedTodo = await Todo.findOne({ where: { id } });
+
+            return {
+                updatedTodo,
+            };
         },
     };
 };

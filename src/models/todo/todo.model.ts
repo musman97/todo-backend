@@ -48,4 +48,5 @@ Todo.init(
     },
 );
 
+export type TodoId = NonNullable<Todo["id"]>;
 export type Todos = Todo[];
